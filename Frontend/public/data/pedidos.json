@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "userId": "2",
+        "createdAt": "2025-06-10T14:30:00",
+        "status": "completed",
+        "totalPrice": 34000,
+        "items": [
+            {
+                "productId": "1",
+                "name": "Hamburguesa Clásica",
+                "price": 14000,
+                "quantity": 2
+            },
+            {
+                "productId": "4",
+                "name": "Bebida Coca Cola",
+                "price": 5000,
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "userId": "2",
+        "createdAt": "2025-05-10T14:30:00",
+        "status": "cancelled",
+        "totalPrice": 34000,
+        "items": [
+            {
+                "productId": "1",
+                "name": "Hamburguesa Clásica",
+                "price": 14000,
+                "quantity": 2
+            },
+            {
+                "productId": "4",
+                "name": "Bebida Coca Cola",
+                "price": 5000,
+                "quantity": 1
+            }
+        ]
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "name": "Hamburguesas",
+        "description": "Hamburguesas deliciosas"
+    },
+    {
+        "id": "2",
+        "name": "Pizzas",
+        "description": "Pizzas recién hechas"
+    },
+    {
+        "id": "3",
+        "name": "Panchos",
+        "description": "Panchos deliciosos"
+    },
+    {
+        "id": "4",
+        "name": "Bebidas",
+        "description": "Bebidas refrescantes"
+    },
+    {
+        "id": "5",
+        "name": "Postres",
+        "description": "Postres irresistibles"
+    }
+]

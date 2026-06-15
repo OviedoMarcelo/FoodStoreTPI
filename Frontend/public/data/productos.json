@@ -1,0 +1,202 @@
+[
+    {
+        "id": "1",
+        "name": "Hamburguesa Clásica",
+        "description": "Pan, carne, queso cheddar, lechuga, cebolla y tomate",
+        "price": 14000,
+        "imageUrl": "/images/hamburguesa-clasica.png",
+        "categoryId": "1",
+        "stock": 10,
+        "available": true
+    },
+    {
+        "id": "2",
+        "name": "Pizza Pepperoni",
+        "description": "Queso, pepperoni y salsa de tomate",
+        "price": 15000,
+        "imageUrl": "/images/pizza-pepperoni.png",
+        "categoryId": "2",
+        "stock": 8,
+        "available": true
+    },
+    {
+        "id": "3",
+        "name": "Pancho Clásico",
+        "description": "Pancho clásico con condimentos",
+        "price": 12000,
+        "imageUrl": "/images/pancho-clasico.png",
+        "categoryId": "3",
+        "stock": 15,
+        "available": true
+    },
+    {
+        "id": "4",
+        "name": "Bebida Coca Cola",
+        "description": "Coca Cola fría 500ml",
+        "price": 5000,
+        "imageUrl": "/images/bebida-coca-cola.png",
+        "categoryId": "4",
+        "stock": 20,
+        "available": true
+    },
+    {
+        "id": "5",
+        "name": "Postre Helado",
+        "description": "Helado artesanal",
+        "price": 8000,
+        "imageUrl": "/images/postre-helado.png",
+        "categoryId": "5",
+        "stock": 5,
+        "available": true
+    },
+    {
+        "id": "6",
+        "name": "Hamburguesa BBQ",
+        "description": "Doble carne, salsa BBQ ahumada y cebolla caramelizada",
+        "price": 16000,
+        "imageUrl": "/images/hamburguesa-clasica.png",
+        "categoryId": "1",
+        "stock": 10,
+        "available": true
+    },
+    {
+        "id": "7",
+        "name": "Hamburguesa Crispy",
+        "description": "Pollo crocante rebozado, lechuga y mayonesa de ajo",
+        "price": 15000,
+        "imageUrl": "/images/hamburguesa-clasica.png",
+        "categoryId": "1",
+        "stock": 10,
+        "available": true
+    },
+    {
+        "id": "8",
+        "name": "Hamburguesa Doble",
+        "description": "Doble medallón de carne, doble queso cheddar y pepinillos",
+        "price": 18000,
+        "imageUrl": "/images/hamburguesa-clasica.png",
+        "categoryId": "1",
+        "stock": 7,
+        "available": true
+    },
+    {
+        "id": "9",
+        "name": "Pizza Margarita",
+        "description": "Salsa de tomate, mozzarella fresca y albahaca",
+        "price": 13000,
+        "imageUrl": "/images/pizza-pepperoni.png",
+        "categoryId": "2",
+        "stock": 8,
+        "available": true
+    },
+    {
+        "id": "10",
+        "name": "Pizza Fugazzeta",
+        "description": "Cebolla, mozzarella desbordante y aceitunas negras",
+        "price": 14000,
+        "imageUrl": "/images/pizza-pepperoni.png",
+        "categoryId": "2",
+        "stock": 8,
+        "available": true
+    },
+    {
+        "id": "11",
+        "name": "Pizza Calabresa",
+        "description": "Salsa de tomate, mozzarella y chorizo calabrés",
+        "price": 15500,
+        "imageUrl": "/images/pizza-pepperoni.png",
+        "categoryId": "2",
+        "stock": 6,
+        "available": true
+    },
+    {
+        "id": "12",
+        "name": "Pancho con Cheddar",
+        "description": "Pancho con salsa cheddar derretida y panceta crocante",
+        "price": 13000,
+        "imageUrl": "/images/pancho-clasico.png",
+        "categoryId": "3",
+        "stock": 15,
+        "available": true
+    },
+    {
+        "id": "13",
+        "name": "Pancho BBQ",
+        "description": "Pancho con salsa BBQ, cebolla crujiente y jalapeños",
+        "price": 13500,
+        "imageUrl": "/images/pancho-clasico.png",
+        "categoryId": "3",
+        "stock": 15,
+        "available": true
+    },
+    {
+        "id": "14",
+        "name": "Pancho Doble",
+        "description": "Doble pancho con mostaza, ketchup y chucrut",
+        "price": 14000,
+        "imageUrl": "/images/pancho-clasico.png",
+        "categoryId": "3",
+        "stock": 12,
+        "available": true
+    },
+    {
+        "id": "15",
+        "name": "Fanta Naranja",
+        "description": "Gaseosa de naranja 500ml bien fría",
+        "price": 5000,
+        "imageUrl": "/images/bebida-coca-cola.png",
+        "categoryId": "4",
+        "stock": 20,
+        "available": true
+    },
+    {
+        "id": "16",
+        "name": "Agua Mineral",
+        "description": "Agua sin gas 500ml",
+        "price": 4000,
+        "imageUrl": "/images/bebida-coca-cola.png",
+        "categoryId": "4",
+        "stock": 25,
+        "available": true
+    },
+    {
+        "id": "17",
+        "name": "Jugo de Naranja",
+        "description": "Jugo natural exprimido al momento 400ml",
+        "price": 6000,
+        "imageUrl": "/images/bebida-coca-cola.png",
+        "categoryId": "4",
+        "stock": 10,
+        "available": true
+    },
+    {
+        "id": "18",
+        "name": "Brownie de Chocolate",
+        "description": "Brownie tibio con helado de vainilla y salsa de chocolate",
+        "price": 9000,
+        "imageUrl": "/images/postre-helado.png",
+        "categoryId": "5",
+        "stock": 5,
+        "available": true
+    },
+    {
+        "id": "19",
+        "name": "Cheesecake",
+        "description": "Cheesecake de frutos rojos con crema batida",
+        "price": 10000,
+        "imageUrl": "/images/postre-helado.png",
+        "categoryId": "5",
+        "stock": 4,
+        "available": true
+    },
+    {
+        "id": "20",
+        "name": "Tiramisú",
+        "description": "Postre italiano clásico con café y mascarpone",
+        "price": 11000,
+        "imageUrl": "/images/postre-helado.png",
+        "categoryId": "5",
+        "stock": 3,
+        "available": true
+    }
+]

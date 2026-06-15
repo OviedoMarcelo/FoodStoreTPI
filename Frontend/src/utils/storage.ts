@@ -5,11 +5,6 @@ export const saveUsers = (users: IUser[]): void => {
     localStorage.setItem('users', JSON.stringify(users));
 }
 
-//Obtiene el array completo de usuarios
-export const getUsers = (): IUser[] => {
-    const users = localStorage.getItem('users');
-    return users ? JSON.parse(users) : [];
-}
 
 //Guarda la sesión del usuario actualmente logueado
 export const saveSession = (user: IUser): void => {
