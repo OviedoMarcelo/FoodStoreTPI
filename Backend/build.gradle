@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.tup.programacion3'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:6.0.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    compileOnly("org.projectlombok:lombok:1.18.46")
+    annotationProcessor("org.projectlombok:lombok:1.18.46")
+
+    // JPA + Hibernate
+    implementation 'org.hibernate.orm:hibernate-core:6.6.4.Final'
+
+    // H2 - base de datos en memoria/archivo
+    implementation 'com.h2database:h2:2.3.232'
+}
+
+test {
+    useJUnitPlatform()
+}
