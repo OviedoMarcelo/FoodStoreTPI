@@ -1,9 +1,9 @@
-import type { IUser } from "../../types/IUser";
-import { checkAuth } from "../../utils/auth";
-import { navigateTo } from "../../utils/navigate";
-import { removeSession, getSession } from "../../utils/storage";
+import type { IUser } from "../../../types/IUser";
+import { checkAuth } from "../../../utils/auth";
+import { navigateTo } from "../../../utils/navigate";
+import { removeSession, getSession } from "../../../utils/storage";
 
-checkAuth('client');
+checkAuth('admin');
 const user: IUser = getSession() as IUser;
 
 const welcomeMessage = document.getElementById('welcome-message');

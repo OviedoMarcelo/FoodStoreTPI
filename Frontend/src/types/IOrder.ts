@@ -9,5 +9,5 @@ export interface IOrder {
         quantity: number
     }[];
     totalPrice: number;
-    createdAt: Date;
+    createdAt: string;
 }

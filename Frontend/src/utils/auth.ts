@@ -15,9 +15,11 @@ export const checkAuth = (requiredRole: Role): void => {
 
     // 3. Si el rol no coincide → su home
     if (user.role !== requiredRole) {
-        console.log(`Rol no autorizado, redirigiendo a ${user.role} home...`);
-        navigateTo(`/src/pages/${user.role}/home.html`);
-        return;
+        if (user.role === 'admin') {
+            navigateTo('/src/pages/admin/adminHome/home.html');
+        } else {
+            navigateTo('/src/pages/store/home/home.html');
+        }
     }
 
     // 4. Si todo ok → no hace nada, deja pasar

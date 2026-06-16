@@ -1,28 +1,424 @@
+/* ============================================================
+   VARIABLES GLOBALES
+   Paleta de colores y valores reutilizables en todo el proyecto
+============================================================ */
 :root {
     --color-primario: #E63946;
+    --color-navbar: #1B2D1B;
     --color-fondo: #F1FAEE;
     --color-texto: #1D3557;
     --color-blanco: #FFFFFF;
     --color-borde: #A8DADC;
     --color-focus: #F4A261;
+    --color-gris: #666666;
+    --color-gris-claro: #f4f4f4;
+    --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --sombra-hover: 0 6px 16px rgba(0, 0, 0, 0.14);
+    --radio-borde: 10px;
+    --transicion: all 0.25s ease;
 }
-/* Reset de estilos para asegurar consistencia en diferentes navegadores */
-*{
+
+
+/* ============================================================
+   RESET
+   Elimina estilos por defecto para consistencia entre navegadores
+============================================================ */
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-/* Estilos Generales */
+
+/* ============================================================
+   ESTILOS GENERALES
+============================================================ */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: var(--color-fondo);
+    color: var(--color-texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* ============================================================
+   HEADER Y NAVBAR
+   Navbar sticky que permanece visible al hacer scroll
+============================================================ */
+header {
+    background-color: var(--color-navbar);
+    padding: 0 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    gap: 2rem;
+}
+
+/* Logo del navbar */
+.nav-logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+}
+
+.logo-food {
+    color: var(--color-blanco);
+}
+
+.logo-store {
+    color: var(--color-primario);
+    font-style: italic;
+}
+
+/* Links de navegación */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.nav-links li a {
+    color: var(--color-blanco);
+    font-weight: 500;
+    padding: 0.4rem 0;
+    transition: var(--transicion);
+    opacity: 0.85;
+}
+
+.nav-links li a:hover {
+    opacity: 1;
+    color: var(--color-borde);
+}
+
+/* Enlace del carrito con badge de cantidad */
+.nav-cart {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.cart-badge {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* Sección del usuario logueado */
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.nav-user span {
+    color: var(--color-blanco);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Botón de cerrar sesión en el navbar */
+.btn-logout {
+    background-color: transparent;
+    color: var(--color-blanco);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 0.35rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+
+.btn-logout:hover {
+    background-color: var(--color-blanco);
+    color: var(--color-navbar);
+    border-color: var(--color-blanco);
+}
+
+
+/* ============================================================
+   LAYOUT PRINCIPAL DEL HOME
+   Grid de 2 columnas: sidebar fijo a la izquierda, contenido a la derecha
+============================================================ */
+.home-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    flex: 1;
+    align-items: start;
+}
+
+
+/* ============================================================
+   SIDEBAR DE CATEGORÍAS
+============================================================ */
+.sidebar {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    padding: 1.25rem;
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 75px;
+}
+
+/* Título de la sección de categorías */
+.sidebar-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-gris);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+/* Items de la lista de categorías */
+#categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+#categories-list li a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    color: var(--color-blanco);
+    font-size: 0.9rem;
+    transition: var(--transicion);
+    background-color: var(--color-navbar);
+}
+
+#categories-list li a:hover {
+    background-color: var(--color-fondo);
+    color: var(--color-primario);
+}
+
+/* Clase activa para la categoría seleccionada */
+#categories-list li a.active {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    font-weight: bold;
+}
+
+
+/* ============================================================
+   ÁREA DE CONTENIDO (buscador + productos)
+============================================================ */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+
+/* ============================================================
+   BUSCADOR
+============================================================ */
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Ícono de búsqueda posicionado dentro del input */
+.search-icon {
+    position: absolute;
+    left: 0.85rem;
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 2px solid var(--color-borde);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: var(--color-blanco);
+    color: var(--color-texto);
+    transition: var(--transicion);
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+}
+
+
+/* ============================================================
+   GRILLA DE PRODUCTOS
+   auto-fill: crea tantas columnas como entren en el ancho disponible
+============================================================ */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+/* Mensaje cuando no hay resultados de búsqueda */
+.no-results {
+    text-align: center;
+    color: var(--color-gris);
+    padding: 2rem;
+    font-size: 1rem;
+}
+
+
+/* ============================================================
+   TARJETA DE PRODUCTO
+============================================================ */
+.product-card {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Efecto al pasar el mouse sobre la card */
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-hover);
+}
+
+/* Imagen del producto */
+.product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+/* Contenedor del texto y botón dentro de la card */
+.product-card-body {
+    padding: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+}
+
+/* Etiqueta de categoría pequeña */
+.product-category {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+/* Nombre del producto */
+.product-card h3 {
+    font-size: 0.95rem;
+    color: var(--color-texto);
+    line-height: 1.3;
+}
+
+/* Descripción del producto */
+.product-card p {
+    font-size: 0.8rem;
+    color: var(--color-gris);
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* Fila de precio y botón agregar */
+.product-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+}
+
+/* Precio del producto */
+.product-price {
+    font-size: 1rem;
+    font-weight: bold;
     color: var(--color-texto);
 }
 
-/* Estilos del contenedor principal*/
+/* Botón de agregar al carrito */
+.btn-agregar {
+    background-color: var(--color-navbar);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: var(--transicion);
+    white-space: nowrap;
+}
+
+.btn-agregar:hover {
+    background-color: var(--color-primario);
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+    background-color: var(--color-navbar);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 1.25rem 2rem;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+footer a {
+    color: var(--color-borde);
+}
+
+footer a:hover {
+    color: var(--color-blanco);
+}
+
+
+/* ============================================================
+   CONTENEDOR CENTRADO (usado en login y registro)
+============================================================ */
 .container {
     width: 100%;
     display: flex;
@@ -31,10 +427,13 @@ body {
     justify-content: center;
 }
 
-/* Estilos del contenedor de login*/
+
+/* ============================================================
+   CONTENEDOR DEL FORMULARIO DE LOGIN / REGISTRO
+============================================================ */
 .login-container {
     background-color: var(--color-blanco);
-    border-radius: 10px;
+    border-radius: var(--radio-borde);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     max-width: 400px;
@@ -43,6 +442,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
 }
 
 .login-container h1 {
@@ -60,15 +460,18 @@ body {
 
 .login-container a {
     color: var(--color-primario);
-    text-decoration: none;
 }
 
 .login-container a:hover {
     text-decoration: underline;
 }
 
-/* Estilos del formulario de login*/
+
+/* ============================================================
+   FORMULARIO DE LOGIN / REGISTRO
+============================================================ */
 .login-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -76,21 +479,20 @@ body {
     gap: 0.5rem;
 }
 
-/* Estilos del último y penúltimo elemento del formulario*/
+/* Último y penúltimo elemento centrados (botón y link) */
 .login-form :nth-last-child(-n+2) {
     align-self: center;
 }
 
-/* Estilos del input de login*/
+/* Input del formulario */
 .login-form input {
     border: 1px solid var(--color-borde);
     border-radius: 5px;
     padding: 0.5rem;
     width: 100%;
-    box-sizing: border-box;
 }
 
-/* Estilos del input de login al pasar el mouse*/
+/* Input al recibir foco */
 .login-form input:focus {
     outline: none;
     border-color: var(--color-focus);
@@ -99,9 +501,10 @@ body {
 
 .login-form label {
     color: var(--color-texto);
+    font-size: 0.9rem;
 }
 
-/* Estilos del botón de submit*/
+/* Botón de submit del formulario */
 .btn-submit {
     background-color: var(--color-primario);
     color: var(--color-blanco);
@@ -110,11 +513,145 @@ body {
     border-radius: 5px;
     padding: 0.6rem 1.2rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transicion);
 }
 
-/* Estilos del botón de submit al pasar el mouse*/
+/* Efecto hover del botón de submit */
 .btn-submit:hover {
     background-color: var(--color-blanco);
     color: var(--color-primario);
+}
+
+/* ============================================================
+   DISEÑO DE CART PAGE
+============================================================ */
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    flex: 1;
+    align-items: start;
+}
+
+.cart-container {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    padding: 1.5rem;
+    min-width: 90%;
+    width: 100%;
+}
+
+.cart-item {
+    border-bottom: 1px solid var(--color-gris-claro);
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    align-items: center;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 1rem;
+}
+
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.cart-item-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 80%;
+    align-self: center;
+}
+
+.cart-item-actions .btn-remove {
+    background-color: transparent;
+    color: var(--color-primario);
+    border: 1.5px solid var(--color-primario);
+    border-radius: 5px;
+    padding: 0.35rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+
+.cart-item-actions .btn-remove:hover {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+}
+
+.cart-item-actions .btn-update {
+    background-color: var(--color-focus);
+    color: var(--color-blanco);
+    border: none;
+    border-radius: 5px;
+    padding: 0.35rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+
+.cart-item-actions .btn-update:hover {
+    background-color: var(--color-navbar);
+    color: var(--color-blanco);
+}
+
+.cart-item-actions .quantity-input {
+    width: 60px;
+    padding: 0.3rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cart-summary {
+    background-color: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    padding: 1.5rem;
+    min-width: 90%;
+    width: 100%;
+}
+
+.cart-summary button {
+    background-color: var(--color-primario);
+    color: var(--color-blanco);
+    font-weight: bold;
+    border: 2px solid var(--color-primario);
+    border-radius: 5px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    transition: var(--transicion);
+    width: 100%;
+
+}
+
+.cart-summary button:hover {
+    background-color: var(--color-blanco);
+    color: var(--color-primario);
+
+}
+
+/*Diseño del toast*/
+.toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background-color: var(--color-primario);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    z-index: 1000;
 }

@@ -30,9 +30,9 @@ form?.addEventListener('submit', async (event: SubmitEvent) => {
     if (user) {
         saveSession(user);
         if (user.role === 'admin') {
-            navigateTo("../../admin/home.html");
+            navigateTo("../../admin/adminHome/home.html");
         } else {
-            navigateTo("../../client/home.html");
+            navigateTo("../../store/home/home.html");
         }
     } else {
         //Si no encontramos un usuario válido, mostramos un mensaje de error

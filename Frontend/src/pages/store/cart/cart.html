@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../style.css">
+    <title>Food Store - Carrito</title>
+</head>
+
+<body>
+
+    <!-- ============================================================
+         ENCABEZADO - Navbar sticky con logo, navegación y usuario
+    ============================================================ -->
+    <header>
+        <nav>
+            <!-- Logo -->
+            <div class="nav-logo">
+                <span class="logo-food">Food</span><span class="logo-store">Store</span>
+            </div>
+
+            <!-- Links de navegación -->
+            <ul class="nav-links">
+                <li><a href="/src/pages/store/home/home.html">Inicio</a></li>
+                <li><a href="/src/pages/store/cart/cart.html" class="nav-cart">
+                        Carrito <span id="cart-count" class="cart-badge">0</span>
+                    </a></li>
+            </ul>
+
+            <!-- Info del usuario logueado -->
+            <div class="nav-user">
+                <span id="nav-username">Cargando...</span>
+                <button id="btn-logout" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </nav>
+    </header>
+    <!-- FIN ENCABEZADO -->
+
+
+    <!-- ============================================================
+         CONTENIDO PRINCIPAL 
+    ============================================================ -->
+    <main class="cart-layout">
+        <div class="cart-container">
+            <h2>Tu Carrito</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Aquí se cargarán los productos del carrito -->
+            </div>
+        </div>
+        <div class="cart-summary">
+            <h2>Resumen de compra</h2>
+            <p>Cant. de productos: <span id="cart-quantity">0</span></p>
+            <p>Total: $<span id="cart-total">0.00</span></p>
+            <button id="checkout-btn" class="btn-checkout">Finalizar Compra</button>
+        </div>
+    </main>
+    <!-- FIN CONTENIDO PRINCIPAL -->
+
+
+    <!-- ============================================================
+         PIE DE PÁGINA
+    ============================================================ -->
+    <footer>
+        <p>Food Store 2026 🍔🍟 — Todos los derechos reservados</p>
+        <p>
+            Contacto:
+            <a href="mailto:info@foodstore.com.ar">info@foodstore.com.ar</a>
+        </p>
+    </footer>
+    <!-- FIN PIE DE PÁGINA -->
+
+    <!-- Script principal de la página -->
+    <script type="module" src="./cart.ts"></script>
+
+</body>
+
+</html>
