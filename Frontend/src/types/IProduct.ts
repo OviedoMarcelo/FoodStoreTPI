@@ -7,4 +7,5 @@ export interface IProduct {
     categoryId: string;
     stock: number;
     available: boolean;
+    deleted: boolean;
 }

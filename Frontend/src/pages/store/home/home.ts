@@ -65,7 +65,9 @@ function renderProducts(filteredProducts?: IProduct[]) {
     <p>${product.description}</p>
     <div class="product-card-footer">
     <p class="product-price">Precio: $${product.price.toLocaleString()}</p>
-    <button class="btn-agregar" data-id="${product.id}">Agregar al carrito</button>
+        <span class="badge ${product.available ? 'badge-available' : 'badge-unavailable'}">
+        ${product.available ? 'Disponible' : 'No disponible'}
+        </span>
     </div>
     </div>
 </div>`).join('');
@@ -81,20 +83,20 @@ function renderProducts(filteredProducts?: IProduct[]) {
     }
 
     //Agrego evento a los botones de agregar al carrito
-    productList?.querySelectorAll('.btn-agregar').forEach(button => {
-        button.addEventListener('click', () => {
-            const productId = button.getAttribute('data-id');
-            if (productId) {
-                const product = products.find(p => p.id === productId);
-                if (product) {
-                    addToCart({ product, quantity: 1 });
-                    showToast('Producto agregado al carrito', 2000);
+    /*     productList?.querySelectorAll('.btn-agregar').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-id');
+                if (productId) {
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        addToCart({ product, quantity: 1 });
+                        showToast('Producto agregado al carrito', 2000);
+                    }
                 }
-            }
-            updateCartCount();
+                updateCartCount();
+            });
         });
-    });
-
+     */
     //Agrego evento para llevar al detalle del producto al hacer click en la tarjeta
     productList?.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('click', () => {
@@ -162,7 +164,7 @@ function renderCategoryBar(): void {
 }
 
 async function init() {
-    allProducts = await getProducts();
+    allProducts = (await getProducts()).filter(p => p.available && !p.deleted);
     allCategories = await getCategories();
 
     sessionInNav();

@@ -1,32 +1,52 @@
-// Importamos la interfaz que definimos para el usuario
 import type { IUser } from "../../../types/IUser";
 import { navigateTo } from "../../../utils/navigate";
-import { getUsers, saveUsers } from "../../../utils/storage";
+import { getUsers } from "../../../utils/data";
+import { saveUsers, saveSession } from "../../../utils/storage";
 
-//Seleccionamos el formulario por su id
 const form = document.querySelector<HTMLFormElement>('#form-registro');
 
-//Escuchamos el evento submit
-form?.addEventListener('submit', (event: SubmitEvent) => {
-    //Prevenimos la recarga de la página
+form?.addEventListener('submit', async (event: SubmitEvent) => {
     event.preventDefault();
-    //Capturamos los datos del formulario
     const formEl = event.currentTarget as HTMLFormElement;
     const data = new FormData(formEl);
-    //Armamos el objeto usuario con la interfaz IUser
+
+    const name = data.get('name') as string;
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
+
+    // Validar formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('El email no tiene un formato válido.');
+        return;
+    }
+
+    // Validar longitud de contraseña
+    if (password.length < 6) {
+        alert('La contraseña debe tener al menos 6 caracteres.');
+        return;
+    }
+
+    // Verificar email duplicado
+    const existingUsers = await getUsers();
+    const emailTaken = existingUsers.find(u => u.email === email);
+    if (emailTaken) {
+        alert('Ya existe una cuenta con ese email.');
+        return;
+    }
+
     const nuevoUsuario: IUser = {
-        name: data.get('name') as string,
-        email: data.get('email') as string,
-        password: data.get('password') as string,
+        id: Date.now().toString(),
+        name,
+        email,
+        password,
         role: 'client'
     };
-    //Recuperamos el array existente o array vacío si no hay nada
-    const users: IUser[] = getUsers();
 
-    //Agregamos el nuevo usuario al array
-    users.push(nuevoUsuario);
-
-    //Guardamos el array actualizado en localStorage
-    saveUsers(users);
-    navigateTo("../login/login.html");
-})
+    // Guardar en localStorage y hacer auto-login
+    const localUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    localUsers.push(nuevoUsuario);
+    saveUsers(localUsers);
+    saveSession(nuevoUsuario);
+    navigateTo("/src/pages/store/home/home.html");
+});

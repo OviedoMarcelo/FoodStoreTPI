@@ -917,7 +917,124 @@ footer a:hover {
 
 
 
+/* ============================================================
+   MIS PEDIDOS
+============================================================ */
+.orders-layout {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+}
 
+.orders-header h1 {
+    font-size: 1.6rem;
+    color: var(--color-texto);
+    margin-bottom: 1.5rem;
+}
+
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.order-card {
+    background: var(--color-blanco);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+
+.order-card:hover {
+    box-shadow: var(--sombra-hover);
+    transform: translateY(-2px);
+}
+
+.order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.order-number {
+    font-weight: 700;
+    color: var(--color-texto);
+}
+
+.order-date {
+    font-size: 0.85rem;
+    color: var(--color-gris);
+}
+
+.order-summary {
+    font-size: 0.9rem;
+    color: var(--color-gris);
+    margin: 0.25rem 0;
+}
+
+.order-total {
+    font-size: 1rem;
+    color: var(--color-texto);
+    margin-top: 0.5rem;
+}
+
+/* Badges de estado */
+.badge-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.badge-processing {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.badge-completed {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-cancelled {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Modal de detalle de pedido */
+.modal-order {
+    max-width: 520px;
+}
+
+.order-modal-status p {
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+}
+
+.order-modal-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.75rem 0;
+}
+
+.order-modal-items li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+}
+
+.order-modal-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    color: var(--color-primario);
+    margin-top: 0.5rem;
+}
 
 /* ============================================================
    DISEÑO DE TOAST NOTIFICATIONS
