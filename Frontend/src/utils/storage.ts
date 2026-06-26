@@ -1,4 +1,7 @@
 import type { IUser } from "../types/IUser";
+import type { IOrder } from "../types/IOrder";
+
+
 
 //Guarda el array completo de usuarios
 export const saveUsers = (users: IUser[]): void => {
@@ -20,4 +23,17 @@ export const getSession = (): IUser | null => {
 //Elimina la sesión del usuario actualmente logueado
 export const removeSession = (): void => {
     localStorage.removeItem('userData');
+}
+
+
+
+export const saveOrder = (order: IOrder): void => {
+    const orders = getLocalOrders();
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+}
+
+export const getLocalOrders = (): IOrder[] => {
+    const orders = localStorage.getItem('orders');
+    return orders ? JSON.parse(orders) : [];
 }

@@ -1,82 +1,70 @@
 import { checkAuth } from "../../../utils/auth";
 import { countCartItems, getCart, calculateCartTotal, removeFromCart, updateCartQuantity, clearCart } from "../../../utils/cart";
 import { navigateTo } from "../../../utils/navigate";
-import { getSession, removeSession } from "../../../utils/storage";
+import { getSession, removeSession, saveOrder } from "../../../utils/storage";
 import { showToast } from "../../../utils/toast";
+import type { IOrder } from "../../../types/IOrder";
 
 checkAuth('client');
 
-//Modifico el cart count del nav si se agrega un elemento al carrito
 function updateCartCount(): void {
     const cartCount = document.getElementById('cart-count');
-    const totalItems = countCartItems();
-    if (cartCount) {
-        cartCount.textContent = String(totalItems);
-    }
+    if (cartCount) cartCount.textContent = String(countCartItems());
 }
 
-//Defino función para actualizar el nombre de sesión en el nav y agregar funcionalidad al botón de logout
 function sessionInNav(): void {
     const session = getSession();
     const navUsername = document.getElementById('nav-username');
-    if (navUsername && session) {
-        navUsername.textContent = `Hola, ${session.name}!`;
-    }
+    if (navUsername && session) navUsername.textContent = `Hola, ${session.name}!`;
 
-    const logoutButton = document.getElementById('btn-logout');
-    logoutButton?.addEventListener('click', () => {
+    document.getElementById('btn-logout')?.addEventListener('click', () => {
         removeSession();
-        navigateTo("../auth/login/login.html");
+        navigateTo("/src/pages/auth/login/login.html");
     });
 }
-
-/******************************
-RENDER DEL CARRITO DE COMPRAS*
-*****************************/
-
 
 function renderCartItems(): void {
     const cartItemsContainer = document.getElementById('cart-items');
     if (!cartItemsContainer) return;
-    const productsIncart = getCart();
-    if (productsIncart.length === 0) {
-        cartItemsContainer.innerHTML = '<p>Tu carrito está vacío.</p>';
+
+    const productsInCart = getCart();
+
+    if (productsInCart.length === 0) {
+        cartItemsContainer.innerHTML = `
+            <div class="cart-empty">
+                <p>Tu carrito está vacío 🛒</p>
+                <button id="btn-ir-tienda" class="btn-submit">Ver productos</button>
+            </div>`;
         document.getElementById('cart-total')!.textContent = '0';
         document.getElementById('cart-quantity')!.textContent = '0';
+        document.getElementById('btn-ir-tienda')?.addEventListener('click', () => {
+            navigateTo('/src/pages/store/home/home.html');
+        });
         return;
     }
-    cartItemsContainer.innerHTML = productsIncart.map(item =>
+
+    cartItemsContainer.innerHTML = productsInCart.map(item =>
         `<div class="cart-item">
-        <img src="${item.product.imageUrl}" alt="${item.product.name}">
-        <div class="cart-item-details">
-            <h3>${item.product.name}</h3>
-            <p>${item.product.description}</p>
-            <p>Precio: $${item.product.price.toLocaleString()}</p>
-            <p>Cantidad: ${item.quantity}</p>
-        </div>
-        <div class="cart-item-actions">
-            <button class="btn-remove" data-product-id="${item.product.id}">Eliminar</button>
-            <button class="btn-update" data-product-id="${item.product.id}">Actualizar Cantidad</button>
-            <input type="number" class="quantity-input" data-product-id="${item.product.id}" value="${item.quantity}" min="1">
-        </div>
-        <div class="cart-item-total">
-            <p>Total: $${(item.product.price * item.quantity).toLocaleString()}</p>
-        </div>
-    </div>`).join('');
+            <img src="${item.product.imageUrl}" alt="${item.product.name}">
+            <div class="cart-item-details">
+                <h3>${item.product.name}</h3>
+                <p>${item.product.description}</p>
+                <p>Precio unitario: $${item.product.price.toLocaleString()}</p>
+            </div>
+            <div class="cart-item-actions">
+                <input type="number" class="quantity-input" data-product-id="${item.product.id}" value="${item.quantity}" min="1" max="${item.product.stock}">
+                <button class="btn-update" data-product-id="${item.product.id}">Actualizar</button>
+                <button class="btn-remove" data-product-id="${item.product.id}">Eliminar</button>
+            </div>
+            <div class="cart-item-total">
+                <p>$${(item.product.price * item.quantity).toLocaleString()}</p>
+            </div>
+        </div>`).join('');
 
-    const cartTotal = calculateCartTotal();
-    const cartTotalContainer = document.getElementById('cart-total');
-    if (cartTotalContainer) {
-        cartTotalContainer.innerHTML = `${cartTotal.toLocaleString()}`;
-    }
-    const cartQuantityContainer = document.getElementById('cart-quantity');
-    if (cartQuantityContainer) {
-        cartQuantityContainer.innerHTML = `${countCartItems()}`;
-    }
+    document.getElementById('cart-total')!.textContent = calculateCartTotal().toLocaleString();
+    document.getElementById('cart-quantity')!.textContent = String(countCartItems());
 
-    // Agregar event listeners a los botones de eliminar y actualizar cantidad
-    const removeButtons = document.querySelectorAll('.btn-remove');
-    removeButtons.forEach(button => {
+    document.querySelectorAll('.btn-remove').forEach(button => {
         button.addEventListener('click', () => {
             const productId = button.getAttribute('data-product-id');
             if (productId) {
@@ -88,14 +76,13 @@ function renderCartItems(): void {
         });
     });
 
-    const updateButtons = document.querySelectorAll('.btn-update');
-    updateButtons.forEach(button => {
+    document.querySelectorAll('.btn-update').forEach(button => {
         button.addEventListener('click', () => {
             const productId = button.getAttribute('data-product-id');
             if (productId) {
-                const quantityInput = document.querySelector(`.quantity-input[data-product-id="${productId}"]`) as HTMLInputElement;
-                if (quantityInput) {
-                    const newQuantity = parseInt(quantityInput.value);
+                const input = document.querySelector(`.quantity-input[data-product-id="${productId}"]`) as HTMLInputElement;
+                if (input) {
+                    const newQuantity = parseInt(input.value);
                     if (!isNaN(newQuantity) && newQuantity > 0) {
                         updateCartQuantity(productId, newQuantity);
                         renderCartItems();
@@ -106,9 +93,72 @@ function renderCartItems(): void {
             }
         });
     });
-
 }
 
+// Abrir modal
+document.getElementById('checkout-btn')?.addEventListener('click', () => {
+    if (getCart().length === 0) {
+        showToast('Tu carrito está vacío', 2000);
+        return;
+    }
+    const total = calculateCartTotal();
+    document.getElementById('modal-total-price')!.textContent = `$${total.toLocaleString()}`;
+    document.getElementById('modal-checkout')!.style.display = 'flex';
+});
+
+// Cerrar modal
+document.getElementById('btn-close-modal')?.addEventListener('click', () => {
+    document.getElementById('modal-checkout')!.style.display = 'none';
+});
+
+// Confirmar pedido
+document.getElementById('btn-confirm-order')?.addEventListener('click', () => {
+    const phone = (document.getElementById('input-phone') as HTMLInputElement).value.trim();
+    const address = (document.getElementById('input-address') as HTMLTextAreaElement).value.trim();
+    const paymentMethod = (document.getElementById('input-payment') as HTMLSelectElement).value;
+    const notes = (document.getElementById('input-notes') as HTMLTextAreaElement).value.trim();
+
+    if (!phone || !address || !paymentMethod) {
+        showToast('Completá todos los campos obligatorios', 2000);
+        return;
+    }
+
+    const session = getSession();
+    const cart = getCart();
+
+    const newOrder: IOrder = {
+        id: Date.now().toString(),
+        userId: session!.id,
+        status: 'pending',
+        items: cart.map(item => ({
+            productId: item.product.id,
+            name: item.product.name,
+            price: item.product.price,
+            quantity: item.quantity
+        })),
+        totalPrice: calculateCartTotal(),
+        createdAt: new Date().toISOString(),
+        phone,
+        address,
+        paymentMethod: paymentMethod as 'cash' | 'card' | 'transfer',
+        notes
+    };
+
+    saveOrder(newOrder);
+    clearCart();
+    updateCartCount();
+    document.getElementById('modal-checkout')!.style.display = 'none';
+    renderCartItems();
+    showToast('¡Pedido confirmado! Gracias por tu compra 🎉', 3000);
+});
+
+// Vaciar carrito
+document.getElementById('btn-vaciar')?.addEventListener('click', () => {
+    clearCart();
+    updateCartCount();
+    renderCartItems();
+    showToast('Carrito vaciado', 2000);
+});
 
 updateCartCount();
 sessionInNav();

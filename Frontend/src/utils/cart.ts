@@ -1,4 +1,4 @@
-import type { IProductInCart } from "../types/product";
+import type { IProductInCart } from "../types/IProductInCart";
 
 
 /*Obtener el carrito desde el local storage*/

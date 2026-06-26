@@ -10,4 +10,8 @@ export interface IOrder {
     }[];
     totalPrice: number;
     createdAt: string;
+    phone: string;
+    address: string;
+    paymentMethod: "cash" | "card" | "transfer";
+    notes?: string;
 }
