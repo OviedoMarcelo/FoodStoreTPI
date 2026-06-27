@@ -5,19 +5,27 @@
         "createdAt": "2025-06-10T14:30:00",
         "status": "completed",
         "totalPrice": 34000,
+        "phone": "2614001234",
+        "address": "Av. San Martín 1234, Mendoza",
+        "paymentMethod": "card",
         "items": [
-            {
-                "productId": "1",
-                "name": "Hamburguesa Clásica",
-                "price": 14000,
-                "quantity": 2
-            },
-            {
-                "productId": "4",
-                "name": "Bebida Coca Cola",
-                "price": 5000,
-                "quantity": 1
-            }
+            { "productId": "1", "name": "Hamburguesa Clásica", "price": 14000, "quantity": 2 },
+            { "productId": "4", "name": "Bebida Coca Cola", "price": 5000, "quantity": 1 }
+        ]
+    },
+    {
+        "id": "2",
+        "userId": "3",
+        "createdAt": "2025-06-12T10:15:00",
+        "status": "pending",
+        "totalPrice": 44000,
+        "phone": "2614009876",
+        "address": "Belgrano 567, Godoy Cruz",
+        "paymentMethod": "cash",
+        "items": [
+            { "productId": "2", "name": "Pizza Pepperoni", "price": 15000, "quantity": 1 },
+            { "productId": "9", "name": "Pizza Margarita", "price": 13000, "quantity": 1 },
+            { "productId": "17", "name": "Jugo de Naranja", "price": 6000, "quantity": 2 }
         ]
     },
     {
@@ -26,19 +34,74 @@
         "createdAt": "2025-05-10T14:30:00",
         "status": "cancelled",
         "totalPrice": 34000,
+        "phone": "2614001234",
+        "address": "Av. San Martín 1234, Mendoza",
+        "paymentMethod": "transfer",
         "items": [
-            {
-                "productId": "1",
-                "name": "Hamburguesa Clásica",
-                "price": 14000,
-                "quantity": 2
-            },
-            {
-                "productId": "4",
-                "name": "Bebida Coca Cola",
-                "price": 5000,
-                "quantity": 1
-            }
+            { "productId": "1", "name": "Hamburguesa Clásica", "price": 14000, "quantity": 2 },
+            { "productId": "4", "name": "Bebida Coca Cola", "price": 5000, "quantity": 1 }
+        ]
+    },
+    {
+        "id": "4",
+        "userId": "4",
+        "createdAt": "2025-06-14T19:00:00",
+        "status": "processing",
+        "totalPrice": 51000,
+        "phone": "2614005555",
+        "address": "Las Heras 890, Mendoza",
+        "paymentMethod": "card",
+        "items": [
+            { "productId": "8", "name": "Hamburguesa Doble", "price": 18000, "quantity": 1 },
+            { "productId": "6", "name": "Hamburguesa BBQ", "price": 16000, "quantity": 1 },
+            { "productId": "15", "name": "Fanta Naranja", "price": 5000, "quantity": 2 },
+            { "productId": "18", "name": "Brownie de Chocolate", "price": 9000, "quantity": 1 }
+        ]
+    },
+    {
+        "id": "5",
+        "userId": "3",
+        "createdAt": "2025-06-15T12:45:00",
+        "status": "completed",
+        "totalPrice": 40000,
+        "phone": "2614009876",
+        "address": "Belgrano 567, Godoy Cruz",
+        "paymentMethod": "transfer",
+        "items": [
+            { "productId": "10", "name": "Pizza Fugazzeta", "price": 14000, "quantity": 1 },
+            { "productId": "11", "name": "Pizza Calabresa", "price": 15500, "quantity": 1 },
+            { "productId": "16", "name": "Agua Mineral", "price": 4000, "quantity": 1 },
+            { "productId": "19", "name": "Cheesecake", "price": 10000, "quantity": 1 }
+        ]
+    },
+    {
+        "id": "6",
+        "userId": "4",
+        "createdAt": "2025-06-17T21:10:00",
+        "status": "pending",
+        "totalPrice": 31000,
+        "phone": "2614005555",
+        "address": "Las Heras 890, Mendoza",
+        "paymentMethod": "cash",
+        "items": [
+            { "productId": "3", "name": "Pancho Clásico", "price": 12000, "quantity": 1 },
+            { "productId": "14", "name": "Pancho Doble", "price": 14000, "quantity": 1 },
+            { "productId": "4", "name": "Bebida Coca Cola", "price": 5000, "quantity": 1 }
+        ]
+    },
+    {
+        "id": "7",
+        "userId": "2",
+        "createdAt": "2025-06-20T16:00:00",
+        "status": "processing",
+        "totalPrice": 46000,
+        "phone": "2614001234",
+        "address": "Av. San Martín 1234, Mendoza",
+        "paymentMethod": "card",
+        "items": [
+            { "productId": "7", "name": "Hamburguesa Crispy", "price": 15000, "quantity": 2 },
+            { "productId": "20", "name": "Tiramisú", "price": 11000, "quantity": 1 },
+            { "productId": "16", "name": "Agua Mineral", "price": 4000, "quantity": 1 }
         ]
     }
 ]

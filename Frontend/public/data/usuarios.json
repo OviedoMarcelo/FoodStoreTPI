@@ -8,9 +8,23 @@
     },
     {
         "id": "2",
-        "name": "Juan",
+        "name": "Juan Pérez",
         "email": "juan@gmail.com",
         "password": "juan123",
+        "role": "client"
+    },
+    {
+        "id": "3",
+        "name": "María García",
+        "email": "maria@gmail.com",
+        "password": "maria123",
+        "role": "client"
+    },
+    {
+        "id": "4",
+        "name": "Carlos López",
+        "email": "carlos@gmail.com",
+        "password": "carlos123",
         "role": "client"
     }
 ]
