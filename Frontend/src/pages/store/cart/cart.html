@@ -52,7 +52,12 @@
         <div class="cart-summary">
             <h2>Resumen de compra</h2>
             <p>Cant. de productos: <span id="cart-quantity">0</span></p>
-            <p>Total: $<span id="cart-total">0.00</span></p>
+            <div class="cart-summary-breakdown">
+                <p>Subtotal: <span>$<span id="cart-subtotal">0</span></span></p>
+                <p>Envío: <span>$<span id="cart-envio">1.000</span></span></p>
+                <hr>
+                <p class="cart-summary-total">Total: <span>$<span id="cart-total">0</span></span></p>
+            </div>
             <button id="checkout-btn" class="btn-checkout">Proceder al Pago</button>
             <button id="btn-vaciar" class="btn-logout">Vaciar carrito</button>
         </div>

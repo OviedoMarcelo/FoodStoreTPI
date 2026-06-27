@@ -692,6 +692,24 @@ footer a:hover {
     font-size: 1.1rem;
 }
 
+.cart-summary-breakdown {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.cart-summary-breakdown p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-summary-total {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
 /* ============================================================
    MODAL DE CHECKOUT
 ============================================================ */

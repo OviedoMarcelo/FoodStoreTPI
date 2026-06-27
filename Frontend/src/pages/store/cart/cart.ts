@@ -5,6 +5,9 @@ import { getSession, removeSession, saveOrder } from "../../../utils/storage";
 import { showToast } from "../../../utils/toast";
 import type { IOrder } from "../../../types/IOrder";
 
+// Costo de envío fijo (ver README para más info)
+const ENVIO = 1000;
+
 checkAuth('client');
 
 function updateCartCount(): void {
@@ -61,7 +64,10 @@ function renderCartItems(): void {
             </div>
         </div>`).join('');
 
-    document.getElementById('cart-total')!.textContent = calculateCartTotal().toLocaleString();
+    const subtotal = calculateCartTotal();
+    document.getElementById('cart-subtotal')!.textContent = subtotal.toLocaleString();
+    document.getElementById('cart-envio')!.textContent = ENVIO.toLocaleString();
+    document.getElementById('cart-total')!.textContent = (subtotal + ENVIO).toLocaleString();
     document.getElementById('cart-quantity')!.textContent = String(countCartItems());
 
     document.querySelectorAll('.btn-remove').forEach(button => {
@@ -101,7 +107,7 @@ document.getElementById('checkout-btn')?.addEventListener('click', () => {
         showToast('Tu carrito está vacío', 2000);
         return;
     }
-    const total = calculateCartTotal();
+    const total = calculateCartTotal() + ENVIO;
     document.getElementById('modal-total-price')!.textContent = `$${total.toLocaleString()}`;
     document.getElementById('modal-checkout')!.style.display = 'flex';
 });
@@ -136,7 +142,7 @@ document.getElementById('btn-confirm-order')?.addEventListener('click', () => {
             price: item.product.price,
             quantity: item.quantity
         })),
-        totalPrice: calculateCartTotal(),
+        totalPrice: calculateCartTotal() + ENVIO,
         createdAt: new Date().toISOString(),
         phone,
         address,
