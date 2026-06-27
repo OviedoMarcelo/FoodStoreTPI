@@ -17,6 +17,22 @@ function sessionInNav(): void {
     const session = getSession();
     const navUsername = document.getElementById('nav-username');
     if (navUsername && session) navUsername.textContent = `Hola, ${session.name}!`;
+
+    // Si es admin: agrego Panel Admin y oculto carrito y mis pedidos
+    if (session?.role === 'admin') {
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks) {
+            navLinks.querySelectorAll('a').forEach(a => {
+                if (a.href.includes('cart') || a.href.includes('orders')) {
+                    (a.parentElement as HTMLElement).style.display = 'none';
+                }
+            });
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="/src/pages/admin/adminHome/home.html" class="nav-admin-link">Panel Admin</a>`;
+            navLinks.appendChild(li);
+        }
+    }
+
     document.getElementById('btn-logout')?.addEventListener('click', () => {
         removeSession();
         navigateTo("/src/pages/auth/login/login.html");

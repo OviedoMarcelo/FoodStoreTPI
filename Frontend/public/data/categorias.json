@@ -2,26 +2,31 @@
     {
         "id": "1",
         "name": "Hamburguesas",
-        "description": "Hamburguesas deliciosas"
+        "description": "Hamburguesas deliciosas",
+        "image": "/images/hamburguesa-clasica.png"
     },
     {
         "id": "2",
         "name": "Pizzas",
-        "description": "Pizzas recién hechas"
+        "description": "Pizzas recién hechas",
+        "image": "/images/pizza-pepperoni.png"
     },
     {
         "id": "3",
         "name": "Panchos",
-        "description": "Panchos deliciosos"
+        "description": "Panchos deliciosos",
+        "image": "/images/pancho-clasico.png"
     },
     {
         "id": "4",
         "name": "Bebidas",
-        "description": "Bebidas refrescantes"
+        "description": "Bebidas refrescantes",
+        "image": "/images/bebida-coca-cola.png"
     },
     {
         "id": "5",
         "name": "Postres",
-        "description": "Postres irresistibles"
+        "description": "Postres irresistibles",
+        "image": "/images/postre-helado.png"
     }
 ]

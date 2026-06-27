@@ -156,6 +156,10 @@ document.getElementById('btn-confirm-order')?.addEventListener('click', () => {
     document.getElementById('modal-checkout')!.style.display = 'none';
     renderCartItems();
     showToast('¡Pedido confirmado! Gracias por tu compra 🎉', 3000);
+    // Espero 3 segundos para que el toast sea visible antes de redirigir
+    setTimeout(() => {
+        navigateTo('/src/pages/client/orders/orders.html');
+    }, 2000);
 });
 
 // Vaciar carrito

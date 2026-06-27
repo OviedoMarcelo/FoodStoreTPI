@@ -218,5 +218,16 @@
         "stock": 3,
         "available": true,
         "deleted": false
+    },
+    {
+        "id": "19",
+        "name": "Cheesecake de frutillas",
+        "description": "Cheesecake de frutillas",
+        "price": 10000,
+        "imageUrl": "/images/postre-helado.png",
+        "categoryId": "5",
+        "stock": 4,
+        "available": false,
+        "deleted": false
     }
 ]
