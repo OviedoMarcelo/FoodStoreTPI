@@ -522,6 +522,15 @@ footer a:hover {
     color: var(--color-primario);
 }
 
+/* Campo que muestra los usuarios para probar el login */
+.valid-user {
+    font-size: 0.75rem;
+    color: var(--color-gris);
+    margin-top: 0.5rem;
+    text-align: center;
+    line-height: 1.2;
+}
+
 /* ============================================================
    DISEÑO DE CART PAGE
 ============================================================ */
@@ -1048,4 +1057,254 @@ footer a:hover {
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     z-index: 1000;
+}
+
+
+
+/* ============================================================
+   PANEL ADMIN
+============================================================ */
+.admin-body {
+    background-color: var(--color-gris-claro);
+}
+
+.admin-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    background-color: var(--color-navbar);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.admin-sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.admin-label {
+    background-color: var(--color-primario);
+    color: white;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.admin-nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: var(--transicion);
+}
+
+.admin-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.admin-nav-link.active {
+    background-color: var(--color-primario);
+    color: white;
+    font-weight: 600;
+}
+
+.admin-sidebar-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-sidebar-footer span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.admin-main {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin-title {
+    font-size: 1.6rem;
+    color: var(--color-texto);
+}
+
+.admin-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-filter-select {
+    padding: 0.5rem 0.75rem;
+    border: 1.5px solid var(--color-borde);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+    background: white;
+}
+
+/* Estadísticas dashboard */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--color-gris);
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.summary-card {
+    background: white;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.summary-card h3 {
+    font-size: 1rem;
+    color: var(--color-texto);
+    margin-bottom: 0.25rem;
+}
+
+/* Tabla admin */
+.admin-table-container {
+    background: white;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-suave);
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.admin-table th {
+    background-color: var(--color-navbar);
+    color: white;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.admin-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-gris-claro);
+    color: var(--color-texto);
+    vertical-align: middle;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tr:hover td {
+    background-color: var(--color-gris-claro);
+}
+
+.admin-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.td-description {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-edit {
+    background-color: var(--color-navbar);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+
+.btn-edit:hover {
+    background-color: var(--color-primario);
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: var(--color-primario);
+    border: 1.5px solid var(--color-primario);
+    border-radius: 5px;
+    padding: 0.35rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: var(--transicion);
+}
+
+.btn-delete:hover {
+    background-color: var(--color-primario);
+    color: white;
+}
+
+.modal-wide {
+    max-width: 560px;
 }

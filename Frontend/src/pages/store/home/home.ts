@@ -2,16 +2,16 @@ import { getCategories, getProducts } from "../../../utils/data";
 import type { IProduct } from "../../../types/IProduct";
 import type { ICategory } from "../../../types/ICategory";
 import { checkAuth } from "../../../utils/auth";
-import { addToCart, countCartItems } from "../../../utils/cart";
+import { countCartItems } from "../../../utils/cart";
 import { navigateTo } from "../../../utils/navigate";
 import { removeSession, getSession } from "../../../utils/storage";
-import { showToast } from "../../../utils/toast";
+
 
 let currentCategory: string = '';
 let searchText: string = '';
 let allProducts: IProduct[] = [];
 let allCategories: ICategory[] = [];
-checkAuth('client');
+checkAuth(['client', 'admin']);
 
 
 /*******************************************************

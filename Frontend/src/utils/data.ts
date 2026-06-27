@@ -19,6 +19,12 @@ export const getOrders = async (): Promise<IOrder[]> => {
     return data;
 }
 
+//Funciones para obtener datos de una categoría por ID desde JSON local
+export const getCategoryById = async (id: string): Promise<ICategory | undefined> => {
+    const categories = await getCategories();
+    return categories.find(c => c.id === id);
+}
+
 //Funciones para obtener datos de productos desde JSON local
 export const getProducts = async (): Promise<IProduct[]> => {
     const response = await fetch('/data/productos.json');
@@ -32,3 +38,4 @@ export const getUsers = async (): Promise<IUser[]> => {
     const data = await response.json();
     return data;
 }
+

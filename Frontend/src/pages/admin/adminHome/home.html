@@ -1,22 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home admin</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <title>Food Store - Panel Admin</title>
 </head>
+<body class="admin-body">
 
-<body>
-    <main>
-        <h1>Bienvenido a la página de inicio admin</h1>
-        <p>Esta es la página principal de la aplicación.</p>
-        <p id="welcome-message"></p>
-        <button id="logout-button">Cerrar sesión</button>
-    </main>
+    <div class="admin-layout">
 
-    <!-- Agrega el script para manejar la lógica de la página de inicio -->
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-logo">
+                <span class="logo-food">Food</span><span class="logo-store">Store</span>
+                <span class="admin-label">Admin</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="/src/pages/admin/adminHome/home.html" class="admin-nav-link active">Dashboard</a>
+                <a href="/src/pages/admin/categories/categories.html" class="admin-nav-link">Categorías</a>
+                <a href="/src/pages/admin/products/products.html" class="admin-nav-link">Productos</a>
+                <a href="/src/pages/admin/orders/orders.html" class="admin-nav-link">Pedidos</a>
+                <a href="/src/pages/store/home/home.html" class="admin-nav-link">Ver Tienda</a>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <span id="nav-username"></span>
+                <button id="btn-logout" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="admin-main">
+            <h1 class="admin-title">Dashboard</h1>
+
+            <!-- Tarjetas de estadísticas -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p class="stat-label">Total Categorías</p>
+                    <p class="stat-value" id="stat-categories">-</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">Total Productos</p>
+                    <p class="stat-value" id="stat-products">-</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">Total Pedidos</p>
+                    <p class="stat-value" id="stat-orders">-</p>
+                </div>
+                <div class="stat-card">
+                    <p class="stat-label">Productos Disponibles</p>
+                    <p class="stat-value" id="stat-available">-</p>
+                </div>
+            </div>
+
+            <!-- Panel de resumen -->
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>Productos</h3>
+                    <p>Activos: <strong id="summary-products-active">-</strong></p>
+                    <p>Inactivos: <strong id="summary-products-inactive">-</strong></p>
+                </div>
+                <div class="summary-card">
+                    <h3>Pedidos por estado</h3>
+                    <p>Pendientes: <strong id="summary-pending">-</strong></p>
+                    <p>En preparación: <strong id="summary-processing">-</strong></p>
+                    <p>Entregados: <strong id="summary-completed">-</strong></p>
+                    <p>Cancelados: <strong id="summary-cancelled">-</strong></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
     <script type="module" src="./home.ts"></script>
 </body>
-
 </html>

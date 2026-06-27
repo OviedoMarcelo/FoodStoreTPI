@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../style.css">
+    <title>Food Store - Categorías</title>
+</head>
+<body class="admin-body">
+
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-logo">
+                <span class="logo-food">Food</span><span class="logo-store">Store</span>
+                <span class="admin-label">Admin</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="/src/pages/admin/adminHome/home.html" class="admin-nav-link">Dashboard</a>
+                <a href="/src/pages/admin/categories/categories.html" class="admin-nav-link active">Categorías</a>
+                <a href="/src/pages/admin/products/products.html" class="admin-nav-link">Productos</a>
+                <a href="/src/pages/admin/orders/orders.html" class="admin-nav-link">Pedidos</a>
+                <a href="/src/pages/store/home/home.html" class="admin-nav-link">Ver Tienda</a>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <span id="nav-username"></span>
+                <button id="btn-logout" class="btn-logout">Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-page-header">
+                <h1 class="admin-title">Categorías</h1>
+                <button id="btn-new-category" class="btn-submit">+ Nueva Categoría</button>
+            </div>
+
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categories-table-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal crear/editar categoría -->
+    <div id="modal-category" class="modal-overlay" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-category-title">Nueva Categoría</h2>
+                <button id="btn-close-category-modal" class="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <label>Nombre</label>
+                <input type="text" id="input-cat-name" placeholder="Nombre de la categoría" />
+                <label>Descripción</label>
+                <textarea id="input-cat-description" placeholder="Descripción"></textarea>
+                <label>Imagen (URL)</label>
+                <input type="text" id="input-cat-image" placeholder="/images/mi-imagen.png" />
+            </div>
+            <div class="modal-footer">
+                <button id="btn-save-category" class="btn-submit">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal confirmar eliminación -->
+    <div id="modal-delete" class="modal-overlay" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Confirmar eliminación</h2>
+                <button id="btn-close-delete-modal" class="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro que querés eliminar esta categoría?</p>
+            </div>
+            <div class="modal-footer" style="gap:1rem; display:flex;">
+                <button id="btn-confirm-delete" class="btn-submit">Eliminar</button>
+                <button id="btn-cancel-delete" class="btn-logout">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./categories.ts"></script>
+</body>
+</html>
