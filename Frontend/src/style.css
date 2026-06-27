@@ -276,6 +276,32 @@ nav {
     box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
 }
 
+.search-sort-bar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-sort-bar .search-bar {
+    flex: 1;
+}
+
+.sort-select {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-borde);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+    background: var(--color-blanco);
+    transition: var(--transicion);
+    cursor: pointer;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--color-primario);
+}
+
 
 /* ============================================================
    GRILLA DE PRODUCTOS

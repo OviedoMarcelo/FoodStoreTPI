@@ -1,5 +1,5 @@
 import { checkAuth } from "../../../utils/auth";
-import { getProducts, getCategories, getCategoryById } from "../../../utils/data";
+import { getProducts, getCategories } from "../../../utils/data";
 import { getSession, removeSession } from "../../../utils/storage";
 import { navigateTo } from "../../../utils/navigate";
 import type { IProduct } from "../../../types/IProduct";

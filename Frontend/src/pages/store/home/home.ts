@@ -9,6 +9,7 @@ import { removeSession, getSession } from "../../../utils/storage";
 
 let currentCategory: string = '';
 let searchText: string = '';
+let sortOrder: string = '';
 let allProducts: IProduct[] = [];
 let allCategories: ICategory[] = [];
 checkAuth(['client', 'admin']);
@@ -122,6 +123,13 @@ function filterAndRender(): void {
             p.description.toLowerCase().includes(lowerSearchText)
         );
     }
+
+    //Ordeno los productos según la opción seleccionada
+    if (sortOrder === 'name-asc') filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+    else if (sortOrder === 'name-desc') filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+    else if (sortOrder === 'price-asc') filteredProducts.sort((a, b) => a.price - b.price);
+    else if (sortOrder === 'price-desc') filteredProducts.sort((a, b) => b.price - a.price);
+
     renderProducts(filteredProducts);
 }
 
@@ -159,6 +167,13 @@ function renderCategoryBar(): void {
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     searchInput.addEventListener('input', () => {
         searchText = searchInput.value;
+        filterAndRender();
+    });
+
+    //Agrego evento al selector de ordenamiento
+    const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+    sortSelect.addEventListener('change', () => {
+        sortOrder = sortSelect.value;
         filterAndRender();
     });
 }

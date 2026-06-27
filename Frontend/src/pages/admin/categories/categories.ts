@@ -26,7 +26,7 @@ function renderTable(): void {
     tbody.innerHTML = categories.map(cat => `
         <tr>
             <td>${cat.id}</td>
-            <td><img src="${cat.image || '/images/hamburguesa-clasica.png'}" alt="${cat.name}" class="admin-thumbnail"></td>
+            <td><img src="${cat.image || '/images/default.png'}" alt="${cat.name}" class="admin-thumbnail"></td>
             <td>${cat.name}</td>
             <td>${cat.description}</td>
             <td class="admin-actions">
