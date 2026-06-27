@@ -1,168 +1,161 @@
-# Parcial JPA — Programación III
-**Tecnicatura Universitaria en Programación · UTN**
-**Alumno:** Marcelo Gastón Oviedo Maccari
+# Food Store — Backend
 
----
+Sistema de gestión de pedidos de comida desarrollado en **Java con JPA/Hibernate y base de datos H2** como parte del TPI de Programación III (UTN).
+La interacción se realiza completamente a través de un **menú interactivo de consola**.
 
-## Descripción del proyecto
+## Tecnologías
 
-Sistema de gestión de catálogo desarrollado en Java con JPA/Hibernate y base de datos H2.
-Permite realizar operaciones ABM (Alta, Baja, Modificación) sobre **Categorías** y **Productos**
-a través de un menú interactivo por consola, e incluye una consulta JPQL para filtrar productos
-por categoría.
-
-El proyecto extiende el TP base de la Unidad 8, agregando una capa de repositorios genéricos
-que encapsulan toda la lógica de persistencia, sin modificar ninguna clase del TP original.
-
----
-
-## Tecnologías utilizadas
-
-| Tecnología | Versión |
-|---|---|
-| Java | 17+ |
-| Gradle | 9.5 |
-| Hibernate ORM | 6.6.4.Final |
-| Jakarta Persistence | 3.0 |
-| H2 Database | 2.3.232 |
-| Lombok | Última estable |
-
----
+| Tecnología           | Versión         |
+|----------------------|-----------------|
+| Java                 | 17+             |
+| Gradle               | 9.5             |
+| Hibernate ORM        | 6.6.4.Final     |
+| Jakarta Persistence  | 3.0             |
+| H2 Database          | 2.3.232         |
+| Lombok               | 1.18.46         |
 
 ## Estructura del proyecto
 
 ```
 src/main/java/com/tup/programacion3/
-├── entities/               ← Entidades JPA (no modificadas del TP base)
-│   ├── Base.java           ← @MappedSuperclass con id, eliminado, createdAt
+├── entities/
+│   ├── Base.java              ← @MappedSuperclass con id, eliminado, createdAt
 │   ├── Categoria.java
 │   ├── Producto.java
 │   ├── Usuario.java
 │   ├── Pedido.java
 │   └── DetallePedido.java
-├── enums/                  ← Enums del dominio (no modificados)
-│   ├── Rol.java
-│   ├── Estado.java
-│   └── FormaPago.java
-├── interfaces/             ← Interfaces del dominio (no modificadas)
-│   └── Calculable.java
-├── repository/             ← NUEVO: capa de persistencia
-│   ├── BaseRepository.java      ← Repositorio genérico con CRUD común
-│   ├── CategoriaRepository.java ← Extiende BaseRepository<Categoria>
-│   └── ProductoRepository.java  ← Extiende BaseRepository<Producto> + buscarPorCategoria()
+├── enums/
+│   ├── Rol.java               ← ADMIN, USUARIO
+│   ├── Estado.java            ← PENDIENTE, CONFIRMADO, TERMINADO, CANCELADO
+│   └── FormaPago.java         ← TARJETA, TRANSFERENCIA, EFECTIVO
+├── interfaces/
+│   └── Calculable.java        ← define calcularTotal():void
+├── repository/
+│   ├── BaseRepository.java    ← CRUD genérico abstracto
+│   ├── CategoriaRepository.java
+│   ├── ProductoRepository.java
+│   ├── UsuarioRepository.java
+│   └── PedidoRepository.java
 ├── util/
-│   ├── JPAUtil.java        ← Singleton del EntityManagerFactory
-│   └── DataSeeder.java     ← Datos de prueba del TP base
-└── Main.java               ← NUEVO: menú interactivo de consola
+│   ├── JPAUtil.java           ← Singleton del EntityManagerFactory
+│   └── DataSeeder.java
+└── Main.java                  ← Menú principal de consola
 ```
 
----
+## Cómo ejecutar
 
-## Arquitectura — Patrón Repository
-
-El proyecto implementa el patrón **Repository** para separar responsabilidades:
-
-```
-Main.java          →  interacción con el usuario (menú, Scanner)
-Repository         →  lógica de persistencia (JPA, EntityManager)
-Entities           →  modelo de dominio
-JPAUtil            →  singleton del EntityManagerFactory
-```
-
-`BaseRepository<T>` es una clase abstracta genérica que implementa las operaciones CRUD comunes.
-Cada método abre y cierra su propio `EntityManager`, garantizando un manejo correcto de recursos.
-
-| Método | Descripción |
-|---|---|
-| `guardar(T entity)` | INSERT o UPDATE usando `merge()`. Retorna la entidad con id asignado |
-| `buscarPorId(Long id)` | SELECT por PK. Retorna `Optional<T>` |
-| `listarActivos()` | SELECT con `WHERE eliminado = false` usando JPQL |
-| `eliminarLogico(Long id)` | Baja lógica: `setEliminado(true)` + `merge()`. Retorna `boolean` |
-
----
-
-## Funcionalidades implementadas
-
-### ABM de Categorías
-- **Alta:** solicita nombre (obligatorio) y descripción. Muestra el ID generado.
-- **Baja lógica:** marca `eliminado = true`. Valida que el ID exista y no esté ya dado de baja.
-- **Modificación:** muestra valores actuales. Campo vacío conserva el valor anterior.
-- **Listado:** muestra todas las categorías activas con ID, nombre y descripción.
-
-### ABM de Productos
-- **Alta:** lista categorías activas para seleccionar. Solicita nombre, descripción, precio (> 0) y stock (>= 0). Muestra ID generado y categoría asignada.
-- **Baja lógica:** marca `eliminado = true`. Muestra el nombre del producto afectado.
-- **Modificación:** muestra valores actuales. Precio y stock conservan valor anterior si se deja vacío. Valida precio > 0 y stock >= 0.
-- **Listado:** muestra todos los productos activos con ID, nombre, precio, stock y categoría.
-
-### Reportes
-- **Productos por categoría:** lista categorías activas, el usuario elige una, y se muestran sus productos activos usando JPQL con parámetro nombrado `:categoriaId`.
-
----
-
-## Instrucciones para ejecutar
-
-### Requisitos previos
-- JDK 17 o superior instalado
-- No requiere instalación adicional — H2 es embebida y se descarga con Gradle
+### Requisitos
+- JDK 17 o superior
+- No requiere instalación adicional — H2 es embebida y Gradle descarga las dependencias
 
 ### Pasos
 
-**1. Clonar o descomprimir el proyecto**
+**Desde línea de comandos:**
 ```bash
-cd Oviedo_Marcelo_parcial_2
+cd Backend
+gradlew.bat run        # Windows
+./gradlew run          # Linux/Mac
 ```
 
-**2. Ejecutar con Gradle**
-```bash
-./gradlew run
-# En Windows:
-gradlew.bat run
-```
-
-**3. O ejecutar directamente desde IntelliJ IDEA**
-- Abrir el proyecto
+**Desde IntelliJ IDEA:**
+- Abrir la carpeta `Backend` como proyecto Gradle
 - Ejecutar la clase `Main.java`
 
-### Base de datos
+### Base de datos H2
 
-La base de datos H2 se crea automáticamente en `./data/jpa_db` al iniciar la aplicación.
-No requiere configuración adicional.
+La base se crea automáticamente en `./data/jpa_db` al iniciar la aplicación.
 
-Para acceder a la consola web de H2 mientras el programa está corriendo:
+Para acceder a la consola web mientras el programa está corriendo:
 - URL: `http://localhost:8082`
 - JDBC URL: `jdbc:h2:file:./data/jpa_db;AUTO_SERVER=TRUE`
 - Usuario: `sa`
 - Contraseña: *(vacía)*
 
----
+## Menú de consola
 
-## Configuración JPA — persistence.xml
+```
+=== FOOD STORE — MENU PRINCIPAL ===
+1. Gestionar Categorias
+2. Gestionar Productos
+3. Gestionar Usuarios
+4. Gestionar Pedidos
+5. Reportes
+0. Salir
+```
 
-La unidad de persistencia se llama `programacion3UTN` y está configurada con:
+### Categorías
+- Alta (nombre obligatorio, descripción opcional)
+- Modificar (campo vacío conserva valor anterior)
+- Baja lógica (`eliminado = true`)
+- Listar activas
 
-- **Driver:** `org.h2.Driver`
-- **Base de datos:** archivo local `./data/jpa_db`
-- **Estrategia DDL:** `update` — mantiene los datos entre ejecuciones
-- **SQL visible:** `hibernate.show_sql = true` para seguimiento en consola
+### Productos
+- Alta (requiere categoría activa, precio > 0, stock >= 0)
+- Modificar (campo vacío conserva valor anterior)
+- Baja lógica
+- Listar activos (ID, nombre, precio, stock, categoría)
 
----
+### Usuarios
+- Alta (valida mail único con `buscarPorMail`)
+- Modificar (campo vacío conserva valor anterior, valida mail si cambia)
+- Baja lógica (sus pedidos permanecen en el sistema)
+- Listar activos
+- Buscar por mail
+
+### Pedidos
+- **Alta** — flujo atómico en una única transacción:
+  - Seleccionar usuario y forma de pago
+  - Agregar productos validando disponibilidad y stock
+  - Calcula subtotales y total automáticamente
+  - Reduce stock al confirmar
+  - Rollback completo ante cualquier error
+- Cambiar estado (PENDIENTE → CONFIRMADO → TERMINADO → CANCELADO)
+- Baja lógica (stock NO se restaura)
+- Listar activos
+- Filtrar por usuario
+- Filtrar por estado
+
+### Reportes
+- Productos por categoría (JPQL navegando `Categoria → c.productos`)
+- Pedidos por usuario (JPQL navegando `Usuario → u.pedidos`)
+- Pedidos por estado
+- Total facturado (suma de pedidos en estado TERMINADO, formato `$%.2f`)
+
+## Arquitectura — Patrón Repository
+
+```
+Main.java          →  menú e interacción con el usuario
+Repository         →  lógica de persistencia (JPA/EntityManager)
+Entities           →  modelo de dominio
+JPAUtil            →  singleton del EntityManagerFactory
+```
+
+`BaseRepository<T>` es una clase abstracta genérica con las operaciones CRUD comunes:
+
+| Método                    | Descripción                                                    |
+|---------------------------|----------------------------------------------------------------|
+| `guardar(T entity)`       | `persist()` si id es null, `merge()` si ya tiene id           |
+| `buscarPorId(Long id)`    | Retorna `Optional<T>`                                          |
+| `listarActivos()`         | JPQL con `WHERE e.eliminado = false`                           |
+| `eliminarLogico(Long id)` | Baja lógica: `setEliminado(true)` + `merge()`, retorna boolean |
+
+Cada método abre su propio `EntityManager` y lo cierra en `finally`.
+
+## Enumerados
+
+| Enum        | Valores                                        |
+|-------------|------------------------------------------------|
+| `Rol`       | `ADMIN`, `USUARIO`                             |
+| `Estado`    | `PENDIENTE`, `CONFIRMADO`, `TERMINADO`, `CANCELADO` |
+| `FormaPago` | `TARJETA`, `TRANSFERENCIA`, `EFECTIVO`         |
 
 ## Decisiones de diseño
 
-### Borrado lógico
-Todas las bajas son **lógicas** — se establece `eliminado = true` en vez de borrar el registro.
-Esto preserva la integridad referencial y el historial de datos.
-El campo `eliminado` está definido en `Base` y es heredado por todas las entidades.
+**Borrado lógico:** todas las bajas establecen `eliminado = true`. El registro permanece en la BD para preservar el historial.
 
-### JPAUtil como Singleton
-Crear un `EntityManagerFactory` es costoso (lee el XML, conecta con la BD, inicializa Hibernate).
-`JPAUtil` garantiza que toda la aplicación comparte una sola instancia, mejorando el rendimiento.
+**Transacción atómica en alta de pedido:** todo el alta (crear pedido, agregar detalles, reducir stock) ocurre en un único `EntityManager` con una única transacción. Si falla cualquier paso se hace rollback completo.
 
-### Optional en buscarPorId()
-El método retorna `Optional<T>` en vez de `null` para forzar el manejo explícito del caso
-"no encontrado" en el llamador, evitando `NullPointerException`.
+**Lista temporal en alta de pedido:** los productos se acumulan en una lista de `long[]` (id, cantidad) antes de abrir la transacción. Dentro de la transacción se recupera cada `Producto` con `em.find()` para que quede gestionado y el cambio de stock se sincronice automáticamente en el commit.
 
-### Set en relaciones @OneToMany
-Las colecciones `@OneToMany` usan `Set<>` con `HashSet<>`, siguiendo la especificación JPA
-y las mejores prácticas de Hibernate para relaciones de colección.
+**JPAUtil como Singleton:** crear un `EntityManagerFactory` es costoso. `JPAUtil` garantiza que toda la aplicación comparte una sola instancia.
