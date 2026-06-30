@@ -9,9 +9,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 //Lombok
@@ -35,7 +33,7 @@ public class Pedido extends Base implements Calculable {
     @Builder.Default
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinColumn(name = "pedido_id")
-    private Set<DetallePedido> detallePedidos = new HashSet<>();
+    private List<DetallePedido> detallePedidos = new ArrayList<>();
 
     /**
      * Método factory estático para crear un Pedido.

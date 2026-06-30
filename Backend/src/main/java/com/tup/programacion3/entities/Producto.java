@@ -24,7 +24,8 @@ public class Producto extends Base {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
     private String imagen;
-    private boolean disponible;
+    @Builder.Default //Si no pongo esto se inicializaa en false
+    private boolean disponible = true;
 
 
 }
