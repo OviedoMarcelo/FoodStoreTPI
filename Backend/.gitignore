@@ -5,7 +5,13 @@ build/
 !**/src/test/**/build/
 .kotlin
 
+### H2 Database ###
+data/*.mv.db
+data/*.lock.db
+data/*.trace.db
+
 ### IntelliJ IDEA ###
+.idea/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
